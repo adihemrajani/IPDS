@@ -21,6 +21,9 @@ continent = table[0]
 country = table[1]
 system = table[2]
 ratio = table[3][1:]
+fare system = table[4]
+fare rate = table[5]
+year = table[6]
 
 #Question 2
 def CleanRatio(raw_ratio):
