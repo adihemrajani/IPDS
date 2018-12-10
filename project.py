@@ -1,7 +1,10 @@
 #Question 1
+#on terminal: python -m pip install pandas
 # need to install pandas through -> easy_install pandas
+import pandas
 from pandas.io.html import read_html
 import pickle
+import sqlite3
 
 #load sqlite3 package
 db_file = "rates.db"
