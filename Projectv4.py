@@ -87,11 +87,11 @@ for farerate_unit in farerate:
         segment = farerate_unit.split('US$')[1][0:4].strip()
         if '+' in segment:
             segment = segment.split('+')[0].strip()
-        if '-' in segment:
+        elif '-' in segment:
             segment = segment.split('-')[0].strip()
-        if '(' in segment:
+        elif '(' in segment:
             segment = segment.split('(')[0].strip()
-        if ' ' in segment:
+        elif ' ' in segment:
             segment = segment.split(' ')[0].strip()
         #    clean_farerate.append(float(segment.split(' ')[0].strip()))
         #    clean_farerate.append(float(segment.split('-')[0].strip()))
@@ -112,11 +112,13 @@ for farerate_unit in farerate:
             #clean_farerate.append(float(farerate_unit.split('US$')[1].split(',')[0].strip()))
     #        segment.split(',')[0].strip()
         clean_farerate.append(float(segment))
-    if 'EUR' in farerate_unit[0:3]:
+    elif 'EUR' in farerate_unit[0:3]:
         if '-' in farerate_unit:
             clean_farerate.append(float(farerate_unit.split('EUR')[1].split('-')[0].strip()) * eur_converter)
         elif '+' in farerate_unit:
             clean_farerate.append(float(farerate_unit.split('EUR')[1].split('+')[0].strip()) * eur_converter)
+        else:
+            clean_farerate.append(float(farerate_unit.split('EUR')[1].strip()) * eur_converter)
     elif 'HK$' in farerate_unit[0:3]:
         clean_farerate.append(float(farerate_unit.split('HK$')[1].split('+')[0].strip()) * hkd_converter)
     elif 'CZK' in farerate_unit[0:3]:
@@ -153,19 +155,40 @@ for farerate_unit in farerate:
 clean_year = []
 
 for year_unit in year:
-    clean_year.append(year_unit)
+    clean_year.append(int(year_unit))
 
 bycolumns_cleaned = []
-bycolumns_cleaned.append(parsed_table_data[0])
-bycolumns_cleaned.append(parsed_table_data[1])
-bycolumns_cleaned.append(parsed_table_data[2])
+bycolumns_cleaned.append(continent)
+bycolumns_cleaned.append(country)
+bycolumns_cleaned.append(systemname)
 bycolumns_cleaned.append(clean_ratios)
 bycolumns_cleaned.append(clean_faresystem)
 bycolumns_cleaned.append(clean_farerate)
 bycolumns_cleaned.append(clean_year)
 
-for i in clean_farerate:
+byrows_cleaned = []
+eachrow = []
+'''for i in range(0, len(bycolumns_cleaned)):
+    for j in range(0, len(bycolumns_cleaned[0])):
+        byrows_cleaned.append(continent[i][j]) '''
+
+for each_system in range(0, len(bycolumns_cleaned[0])):
+    newrow = []
+    newrow.append(continent[each_system])
+    newrow.append(country[each_system])
+    newrow.append(systemname[each_system])
+    newrow.append(clean_ratios[each_system])
+    newrow.append(clean_faresystem[each_system])
+    newrow.append(clean_farerate[each_system])
+    newrow.append(clean_year[each_system])
+    byrows_cleaned.append(newrow)
+
+for i in byrows_cleaned:
     print(i)
+#print(len(clean_ratios))
+#print(len(clean_faresystem))
+#print(len(clean_farerate))
+#print(len(clean_year))
 
 #with open('Farebox_Recovery_Ratio_Analysis.csv', mode = 'wb') as faredata_file:
 #    faredata_writer = csv.writer(exam_responses_file)
@@ -198,8 +221,8 @@ for i in range(1,len(parsed_table_data)): # Cycle through elements 1 to the end
         for value in : # Within each element
         values()
 # print(row.text)
-
 '''
+
 '''
 df = pd.read_html(str(table))[0]
 countries = df["COUNTRY"].tolist()
