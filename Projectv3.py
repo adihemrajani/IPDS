@@ -4,6 +4,7 @@
 from bs4 import BeautifulSoup
 import pandas as pd
 import requests
+import csv
 
 website = requests.get("https://en.wikipedia.org/wiki/Farebox_recovery_ratio")
 soup = BeautifulSoup(website.content,'lxml')
@@ -65,60 +66,103 @@ for faresystem_unit in faresystem:
     else:
         clean_faresystem.append(CleanFareSystem(faresystem_unit))
 
+# Conversion Rates to USD i.e. Quantity of USD Comprising Each Currency
 clean_farerate = []
-eur_converter = 0
-hkd_converter = 0
-czk_converter = 0
-chf_converter = 0
-cad_converter = 0
-aus_converter = 0
-gbp_converter = 0
-sek_converter = 0
-jpy_converter = 0
-pkr_converter = 0
-nt_converter = 0
-cny_converter = 0
-sgd_converter = 0
+eur_converter = 1.13
+hkd_converter = 0.13
+czk_converter = 0.044
+chf_converter = 1
+cad_converter = 0.75
+aus_converter = 0.72
+gbp_converter = 1.26
+sek_converter = 0.11
+jpy_converter = 0.0088
+pkr_converter = 0.0072
+nt_converter = 0.032
+cny_converter = 0.14
+sgd_converter = 0.73
 
 for farerate_unit in farerate:
-    if 'US' in farerate_unit[0:3]:
-        clean_farerate.append(farerate_unit)
-    elif 'EUR' in farerate_unit[0:3]:
-        clean_farerate.append(farerate_unit * eur_converter)
-    elif 'HK' in farerate_unit[0:3]:
-        clean_farerate.append(farerate_unit * hkd_converter)
+    #if 'US$' in farerate_unit[0:3]:
+    #    segment = farerate_unit.split('US$')[1]
+    #    if ' ' in segment:
+    #        # clean_farerate.append(float(segment.split(' ')[0].strip()))
+    #        segment.split(' ')[0].strip()
+    #    if '-' in segment:
+    #        #clean_farerate.append(float(segment.split('-')[0].strip()))
+    #        segment.split('-')[1].strip()
+    #    if '+' in segment:
+    ##        segment.split('+')[0].strip()
+    #    if '(' in segment:
+    #        #clean_farerate.append(float(segment.split('(')[0].strip()))
+    #        segment.split('(')[0].strip()
+    #    if '/' in segment:
+    #        #clean_farerate.append(float(farerate_unit.split('US$')[1].split('/')[0].strip()))
+    #        segment.split('/')[0].strip()
+    #    if ',' in segment:
+            #clean_farerate.append(float(farerate_unit.split('US$')[1].split(',')[0].strip()))
+    #        segment.split(',')[0].strip()
+    #    clean_farerate.append(float(segment))
+    if 'EUR' in farerate_unit[0:3]:
+        if '-' in farerate_unit:
+            clean_farerate.append(float(farerate_unit.split('EUR')[1].split('-')[0].strip()) * eur_converter)
+        elif '+' in farerate_unit:
+            clean_farerate.append(float(farerate_unit.split('EUR')[1].split('+')[0].strip()) * eur_converter)
+    elif 'HK$' in farerate_unit[0:3]:
+        clean_farerate.append(float(farerate_unit.split('HK$')[1].split('+')[0].strip()) * hkd_converter)
     elif 'CZK' in farerate_unit[0:3]:
-        clean_farerate.append(farerate_unit * czk_converter)
+        clean_farerate.append(float(farerate_unit.split('CZK')[1].split('+')[0].strip()) * czk_converter)
     elif 'CHF' in farerate_unit[0:3]:
-        clean_farerate.append(farerate_unit * chf_converter)
+        clean_farerate.append(float(farerate_unit.split('CHF')[1].split('+')[0].strip()) * chf_converter)
     elif 'C$' in farerate_unit[0:3]:
-        clean_farerate.append(farerate_unit * cad_converter)
+        clean_farerate.append(float(farerate_unit.split('C$')[1].split(' ')[0].split('+')[0].strip()) * cad_converter)
     elif 'A$' in farerate_unit[0:3]:
-        clean_farerate.append(farerate_unit * aus_converter)
+        segment = farerate_unit.split('A$')[1]
+        if '/' in segment:
+            #segment.split('/')[0].strip()
+            clean_farerate.append(0.15)
+        clean_farerate.append(segment)
     elif '€' in farerate_unit[0:3]:
-        clean_farerate.append(farerate_unit * gbp_converter)
+        clean_farerate.append(float(farerate_unit.split('€')[1].split('+')[0].strip()) * gbp_converter)
     elif 'SEK' in farerate_unit[0:3]:
-        clean_farerate.append(farerate_unit * sek_converter)
+        clean_farerate.append(float(farerate_unit.split('SEK')[1].split('-')[0].strip()) * sek_converter)
     elif '¥' in farerate_unit[0:3]:
-        clean_farerate.append(farerate_unit * jpy_converter)
+        clean_farerate.append(float(farerate_unit.split('¥')[1].split('+')[0].strip()) * jpy_converter)
     elif 'PKR' in farerate_unit[0:3]:
-        clean_farerate.append(farerate_unit * pkr_converter)
-    elif 'NT' in farerate_unit[0:3]:
-        clean_farerate.append(farerate_unit * nt_converter)
+        clean_farerate.append(float(farerate_unit.split('PKR')[1].split('+')[0].strip()) * pkr_converter)
+    elif 'NT$' in farerate_unit[0:3]:
+        clean_farerate.append(float(farerate_unit.split('NT$')[1].split('+')[0].strip()) * nt_converter)
     elif 'CNY' in farerate_unit[0:3]:
-        clean_farerate.append(farerate_unit * cny_converter)
+        clean_farerate.append(float(farerate_unit.split('CNY')[1].split('+')[0].strip()) * cny_converter)
     elif 'SGD' in farerate_unit[0:3]:
-        clean_farerate.append(farerate_unit * sgd_converter)
+        clean_farerate.append(float(farerate_unit.split('SGD')[1].split('+')[0].strip()) * sgd_converter)
     else:
-        clean_farerate.append(farerate_unit)
+        clean_farerate.append('n/a')
 
 clean_year = []
 
 for year_unit in year:
     clean_year.append(year_unit)
 
-for i in clean_year:
+bycolumns_cleaned = []
+bycolumns_cleaned.append(parsed_table_data[0])
+bycolumns_cleaned.append(parsed_table_data[1])
+bycolumns_cleaned.append(parsed_table_data[2])
+bycolumns_cleaned.append(clean_ratios)
+bycolumns_cleaned.append(clean_faresystem)
+bycolumns_cleaned.append(clean_farerate)
+bycolumns_cleaned.append(clean_year)
+
+for i in bycolumns_cleaned:
     print(i)
+
+#with open('Farebox_Recovery_Ratio_Analysis.csv', mode = 'wb') as faredata_file:
+#    faredata_writer = csv.writer(exam_responses_file)
+#    faredata_writer.writerow(headers)
+#    for  in :
+#        responses = exam_responses[student_name]
+#        exam_writer.writerow([student_name] + [responses[question] for question in question_keys])
+
 
 '''
 alldata = pd.DataFrame(columns =['Continent', 'Country', 'System', 'Ratio', 'Fare system', 'Fare rate', 'Year'] )
@@ -149,8 +193,7 @@ for i in range(1,len(parsed_table_data)): # Cycle through elements 1 to the end
 df = pd.read_html(str(table))[0]
 countries = df["COUNTRY"].tolist()
 users = df["AMOUNT"].tolist()
-'''
-'''
+
 from pandas.io.html import read_html
 import pickle
 
@@ -176,12 +219,4 @@ faresystem = table[4]
 farerate = table[5]
 year = table[6]
 
-def CleanRatio(raw_ratio):
-    s = raw_ratio.split("%")
-    return float(s[0]/100.00)
-
-clean_ratios = []
-for ratio in ratios:
-    #print(CleanRate(rate))
-    clean_rates.append(CleanRate(ratios))
 '''
