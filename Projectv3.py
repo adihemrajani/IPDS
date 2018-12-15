@@ -50,7 +50,54 @@ clean_ratios = []
 for ratio in ratios:
     clean_ratios.append(CleanRatio(ratio))
 
-for i in parsed_table_data:
+def CleanFareSystem(fs):
+    cfs = fs.strip().lower()
+    return cfs
+
+clean_faresystem = []
+for faresystem_unit in faresystem:
+    if "flat rate" in CleanFareSystem(faresystem_unit):
+        faresystem_unit = "flat rate"
+        clean_faresystem.append(CleanFareSystem(faresystem_unit))
+    elif "zone based" in CleanFareSystem(faresystem_unit):
+        faresystem_unit = "zone based"
+        clean_faresystem.append(CleanFareSystem(faresystem_unit))
+    else:
+        clean_faresystem.append(CleanFareSystem(faresystem_unit))
+
+clean_farerate = []
+eur_converter = 0
+hkd_converter = 0
+czk_converter = 0
+chf_converter = 0
+cad_converter = 0
+aus_converter = 0
+gbp_converter = 0
+sek_converter = 0
+
+for farerate_unit in farerate:
+    if 'US' in farerate_unit[0:3]:
+        clean_farerate.append(farerate_unit)
+    elif 'EUR' in farerate_unit[0:3]:
+        clean_farerate.append(farerate_unit * eur_converter)
+    elif 'HK' in farerate_unit[0:3]:
+        clean_farerate.append(farerate_unit * hkd_converter)
+    elif 'CZK' in farerate_unit[0:3]:
+        clean_farerate.append(farerate_unit * czk_converter)
+    elif 'CHF' in farerate_unit[0:3]:
+        clean_farerate.append(farerate_unit * chf_converter)
+    elif 'C$' in farerate_unit[0:3]:
+        clean_farerate.append(farerate_unit * cad_converter)
+    elif 'A$' in farerate_unit[0:3]:
+        clean_farerate.append(farerate_unit * aus_converter)
+    elif '€' in farerate_unit[0:3]:
+        clean_farerate.append(farerate_unit * gbp_converter)
+    elif 'SEK' in farerate_unit[0:3]:
+        clean_farerate.append(farerate_unit * sek_converter)
+    else:
+        clean_farerate.append(farerate_unit)
+
+for i in clean_farerate:
     print(i)
 
 '''
@@ -117,4 +164,22 @@ clean_ratios = []
 for ratio in ratios:
     #print(CleanRate(rate))
     clean_rates.append(CleanRate(ratios))
+
+
+¥150+
+¥200+
+
+¥160+
+
+PKR 20
+NT$20+ (cash)
+NT$16+ (EasyCard or other cards)
+NT$20+ (cash)
+NT$17+ (iPASS or other cards)
+SGD 1.10+ (cash)
+SGD 0.77+ (EZ-Link Card)
+CNY 3.00+
+
+
+
 '''
