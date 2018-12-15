@@ -40,7 +40,7 @@ for i in range(1, len(parsed_table_data)): # Cycle through elements 1 to the end
     ratios.append(parsed_table_data[i][3])
     faresystem.append(parsed_table_data[i][4])
     farerate.append(parsed_table_data[i][5])
-    year.append(parsed_table_data[i][6])
+    year.append(parsed_table_data[i][6][0:4])
 
 def CleanRatio(raw_ratio):
     s = raw_ratio.split("%")
@@ -112,7 +112,12 @@ for farerate_unit in farerate:
     else:
         clean_farerate.append(farerate_unit)
 
-for i in clean_farerate:
+clean_year = []
+
+for year_unit in year:
+    clean_year.append(year_unit)
+
+for i in clean_year:
     print(i)
 
 '''
