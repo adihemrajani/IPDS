@@ -74,6 +74,11 @@ cad_converter = 0
 aus_converter = 0
 gbp_converter = 0
 sek_converter = 0
+jpy_converter = 0
+pkr_converter = 0
+nt_converter = 0
+cny_converter = 0
+sgd_converter = 0
 
 for farerate_unit in farerate:
     if 'US' in farerate_unit[0:3]:
@@ -94,6 +99,16 @@ for farerate_unit in farerate:
         clean_farerate.append(farerate_unit * gbp_converter)
     elif 'SEK' in farerate_unit[0:3]:
         clean_farerate.append(farerate_unit * sek_converter)
+    elif '¥' in farerate_unit[0:3]:
+        clean_farerate.append(farerate_unit * jpy_converter)
+    elif 'PKR' in farerate_unit[0:3]:
+        clean_farerate.append(farerate_unit * pkr_converter)
+    elif 'NT' in farerate_unit[0:3]:
+        clean_farerate.append(farerate_unit * nt_converter)
+    elif 'CNY' in farerate_unit[0:3]:
+        clean_farerate.append(farerate_unit * cny_converter)
+    elif 'SGD' in farerate_unit[0:3]:
+        clean_farerate.append(farerate_unit * sgd_converter)
     else:
         clean_farerate.append(farerate_unit)
 
@@ -164,22 +179,4 @@ clean_ratios = []
 for ratio in ratios:
     #print(CleanRate(rate))
     clean_rates.append(CleanRate(ratios))
-
-
-¥150+
-¥200+
-
-¥160+
-
-PKR 20
-NT$20+ (cash)
-NT$16+ (EasyCard or other cards)
-NT$20+ (cash)
-NT$17+ (iPASS or other cards)
-SGD 1.10+ (cash)
-SGD 0.77+ (EZ-Link Card)
-CNY 3.00+
-
-
-
 '''
