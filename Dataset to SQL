@@ -1,0 +1,18 @@
+# import csv
+import sqlite3
+conn = sqlite3.connect("something.db")
+
+cursor = conn.cursor()
+
+#cur.execute("select * from whatver limit x;")
+
+#results = cur.fetchall()
+#print(results)
+
+with open('Farebox_Recovery_Ratio_Analysis.csv', mode = 'wb') as faredata_file:
+    faredata_writer = csv.writer(faredata_file, delimiter = ',')
+    header = faredata_writer.next()
+#   faredata_writer.writerow(headers)
+    for in faredata_writer:
+#        responses = exam_responses[student_name]
+#        exam_writer.writerow([student_name] + [responses[question] for question in question_keys])
