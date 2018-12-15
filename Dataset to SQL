@@ -1,4 +1,4 @@
-# import csv
+import csv
 import sqlite3
 conn = sqlite3.connect("something.db")
 
