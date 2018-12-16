@@ -5,6 +5,10 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import requests
 import csv
+import sqlite3
+
+db_file = "rates.db"
+conn = sqlite3.connect(db_file)
 
 website = requests.get("https://en.wikipedia.org/wiki/Farebox_recovery_ratio")
 soup = BeautifulSoup(website.content,'lxml')
@@ -25,7 +29,7 @@ for row in rows:
         rowtext.append(cleantext)
     parsed_table_data.append(rowtext)
 
-headers = parsed_table_data[0]
+headers = ['Continent', 'Country', 'System', 'Ratio', 'Fare System', 'Fare Rate (US$)', 'Year']
 continent = []
 country = []
 systemname = []
@@ -197,6 +201,21 @@ with open('Farebox_Recovery_Ratio_Analysis.csv', mode = 'w') as faredata_file:
     faredata_writer.writerow(headers)
     for i in range(0, len(byrows_cleaned)):
         faredata_writer.writerow(byrows_cleaned[i])
+
+create_table_sql = """ CREATE TABLE IF NOT EXISTS ratios (
+                                        rate REAL
+                                        country TEXT,
+                                        continent TEXT,
+                                        ) ; """
+
+cur = conn.cursor()
+cur.execute(create_table_sql)
+
+for rate in clean_farerate:
+    sql = """ INSERT INTO rates VALUES (%s, %s, %s, %s); """ % rate
+    print(sql)
+    cur.execute(sql)
+    conn.commit()
 
 '''
 alldata = pd.DataFrame(columns =['Continent', 'Country', 'System', 'Ratio', 'Fare system', 'Fare rate', 'Year'] )
