@@ -1,0 +1,87 @@
+Continent,Country,System,Ratio,Fare system,Fare rate,Year
+Asia,Hong Kong,Hong Kong MTR,1.24,distance based,0.455,2016
+Asia,Japan,Osaka (Hankyu Railway),1.23,distance based,1.32,1991
+Asia,Japan,Osaka (OMTB),1.37,distance based,1.76,1991
+Asia,Japan,JR East,0.84,distance based,n/a,2016
+Asia,Japan,Tokyo Metro,1.19,distance based,1.4080000000000001,2016
+Asia,Japan,Tokyo Toei rail services,0.74,distance based,n/a,2015
+Asia,Pakistan,Lahore Metrobus,0.37200000000000005,flat rate,0.144,2014
+Asia,Taiwan,Taipei Metro,1.0,distance based,0.64,2015
+Asia,Taiwan,Kaohsiung MRT,0.83,distance based,0.64,2015
+Asia,Singapore,Singapore (SMRT),1.01,distance based,0.803,2017
+Asia,China,Beijing Subway,0.6,distance based,0.42000000000000004,2012
+Europe,Netherlands,Amsterdam (GVB),0.88,distance based,n/a,2018
+Europe,Netherlands,Rotterdam (RET),0.8,distance based,n/a,2016
+Europe,Germany,Berlin,0.7,zone based,2.9379999999999997,2010
+Europe,Belgium,Brussels,0.35,,n/a,2007
+Europe,Denmark,Copenhagen,0.52,zone based,n/a,1991
+Europe,UK,London Underground,1.07,zone based,n/a,2016
+Europe,Spain,Metropolitan lines of Ferrocarrils de la Generalitat de Catalunya (FGC),0.93,zone based,n/a,2014
+Europe,Spain,Madrid,0.41,,n/a,2007
+Europe,Italy,Milan,0.28,,n/a,1991
+Europe,Germany,Munich,0.7,zone based,n/a,2010
+Europe,Czech Republic,Prague (DPP),0.53,flat rate,1.056,2013
+Europe,France,Paris (STIF),0.3,zone based,2.2680000000000002,2014
+Europe,Sweden,Stockholm,0.37,zone based,4.84,2007
+Europe,Italy,Rome,0.36,,n/a,2007
+Europe,Austria,Vienna,0.49,flat rate,2.26,2008
+Europe,Finland,Helsinki,0.49,zone based,3.1639999999999997,2011
+Europe,Switzerland,Zurich,0.6,zone based,4.3,2014
+North America,US,Amtrak,0.95,distance & demand based,n/a,2017
+North America,Canada,VIA Rail,0.51,distance & demand based,n/a,2016
+North America,US,Atlanta (MARTA),0.3,flat rate,2.5,2016
+North America,US,Austin (CMTA),0.11,flat rate,1.25,2016
+North America,Canada,Brampton (BT),0.46,flat rate,2.4375,2012
+North America,US,Boston (MBTA),0.3,flat rate,2.65,2016
+North America,Canada,Calgary,0.5,flat rate,2.25,2012
+North America,US,Chicago (CTA),0.55,flat rate,2.5,2016
+North America,US,Chicago (Metra),0.43,zone based,4.0,2016
+North America,US,Cleveland (GCRTA),0.18,flat rate,2.5,2016
+North America,US,Dallas (DART),0.14,flat rate,2.5,2016
+North America,US,Detroit (DDOT),0.2,flat rate,1.5,2016
+North America,Canada,Edmonton (ETS),0.39,flat rate,2.25,2007
+North America,US,"Harrisburg, PA (CAT)",0.17,flat rate,1.75,2015
+North America,US,Las Vegas Monorail,0.56,flat rate,5.0,2016
+North America,US,Long Island (MTA),0.5,zone based,5.0,2012
+North America,US,Los Angeles (LACMTA),0.23,flat rate,1.75,2016
+North America,US,Maryland,0.23,variable,1.6,2012
+North America,US,Miami-Dade Transit,0.21,flat rate,2.25,2016
+North America,US,Minneapolis - St. Paul,0.25,flat rate,2.0,2016
+North America,Canada,Mississauga (MiWay),0.46,flat rate,2.4375,2011
+North America,Canada,Montreal (STM),0.46,flat rate,2.4375,2016
+North America,US,New York City MTA,0.47,flat rate,2.75,2016
+North America,US,New York City (NYC Ferry),0.29,flat rate,2.75,2017
+North America,US,New York/Connecticut (Metro-North),0.6,distance based,2.25,2016
+North America,US,New York/New Jersey (PATH),0.44,flat rate,2.75,2016
+North America,US,New Jersey (NJT),0.45,distance based,2.25,2016
+North America,US,Orlando (Lynx),0.24,flat rate,2.0,2016
+North America,Canada,Ottawa (OC Transpo),0.45,flat rate,2.7375,2014
+North America,US,Philadelphia (SEPTA),0.39,flat rate,2.5,2016
+North America,US,"Pierce County, WA",0.3,flat rate,2.0,2015
+North America,US,Philadelphia/New Jersey (PATCO),0.49,distance based,1.4,2015
+North America,US,Portland Metro Area (TriMet),0.3,flat rate,2.5,2016
+North America,US,Greater Seattle Area (King County Metro),0.35,zone and peak based,2.5,2016
+North America,US,Puget Sound Region (Sound Transit),0.42,zone & distance based,2.75,2017
+North America,Canada,Quebec City (RTC),0.39,flat rate,2.25,2011
+North America,US,San Antonio (VIA),0.12,flat rate,1.2,2016
+North America,US,San Diego MTS,0.39,flat rate,2.5,2016
+North America,US,San Francisco Bay Area (BART),0.7,distance based,2.0,2017
+North America,US,Oakland Airport Connector,0.96,flat rate,6.0,2015
+North America,US,San Francisco Bay Area (Caltrain),0.63,zone based,3.75,2015
+North America,US,San Francisco Bay Area (SFMTA),0.35,flat rate,2.25,2016
+North America,US,Santa Clara County (VTA),0.1,express surcharges,1.25,2016
+North America,US,Southern California Regional Rail Authority,0.41,distance based,2.5,2017
+North America,US,Staten Island (MTA),0.15,flat rate,2.75,2015
+North America,Canada,Toronto (TTC),0.728,flat rate,2.25,2017
+North America,Canada,"Toronto, Hamilton and area (GO Transit)",0.77,distance based,3.9749999999999996,2015
+North America,Canada,Vancouver TransLink,0.5579999999999999,zone based,2.2125000000000004,2017
+North America,US,"Washington, DC (WMATA)",0.42,distance and time of day based,2.0,2016
+North America,Canada,Winnipeg,0.6,flat rate,1.875,2011
+Oceania,New Zealand,Auckland,0.44,zone based,n/a,2012
+Oceania,Australia,Canberra,0.21,flat rate,4.2,2007
+Oceania,Australia,Sydney,0.27,distance based,0.15,2014
+Oceania,Australia,Melbourne,0.3,zone and time based,3.76,2014
+Oceania,New Zealand,Christchurch,0.35,zone based,n/a,2012
+Oceania,New Zealand,Dunedin,0.6,zone based,n/a,2015
+Oceania,New Zealand,Hamilton,0.34,flat rate,n/a,2012
+Oceania,New Zealand,Wellington,0.57,zone based,n/a,2012
