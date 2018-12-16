@@ -1,0 +1,26 @@
+library(RSQLite)
+library(ggplot2)
+
+con = dbConnect(drv=SQLite(), dbname="rates.db")
+
+df.ratios <- dbGetQuery(con, "SELECT * FROM systems")
+
+df.summary <- dbGetQuery(con, "SELECT AVG(ratio) AS avg_ratio FROM systems GROUP BY continent")
+
+ggplot(data = df.ratios, aes(x=ratio)) + 
+  geom_density() + 
+  geom_vline(xintercept = mean(df.ratios$ratio), colour = "red",
+             linetype = "dashed")
+
+
+
+#For question 5?
+x <- runif(100)
+y <- 3*x^2
+df <- data.frame(x = x, y = y)
+
+m <- lm(y ~ x, data = df)
+
+ggplot(data = df, aes(x=x, y=y)) + geom_point()
+
+
