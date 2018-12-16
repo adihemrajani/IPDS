@@ -183,20 +183,20 @@ for each_system in range(0, len(bycolumns_cleaned[0])):
     newrow.append(clean_year[each_system])
     byrows_cleaned.append(newrow)
 
-for i in byrows_cleaned:
-    print(i)
+
 #print(len(clean_ratios))
 #print(len(clean_faresystem))
 #print(len(clean_farerate))
 #print(len(clean_year))
 
-#with open('Farebox_Recovery_Ratio_Analysis.csv', mode = 'wb') as faredata_file:
-#    faredata_writer = csv.writer(exam_responses_file)
-#    faredata_writer.writerow(headers)
-#    for  in :
-#        responses = exam_responses[student_name]
-#        exam_writer.writerow([student_name] + [responses[question] for question in question_keys])
+#import sqlite3
+#conn = sqlite3.connect("something.db")
 
+with open('Farebox_Recovery_Ratio_Analysis.csv', mode = 'w') as faredata_file:
+    faredata_writer = csv.writer(faredata_file)
+    faredata_writer.writerow(headers)
+    for i in range(0, len(byrows_cleaned)):
+        faredata_writer.writerow(byrows_cleaned[i])
 
 '''
 alldata = pd.DataFrame(columns =['Continent', 'Country', 'System', 'Ratio', 'Fare system', 'Fare rate', 'Year'] )
@@ -206,21 +206,6 @@ alldata = pd.DataFrame(columns =['Continent', 'Country', 'System', 'Ratio', 'Far
 
 print(alldata)
 
-
-master = {} # Dictionary containing data by attribute - Adi
-
-keys = []
-for header in parsed_table_data[0]: # Cycle through headers in element 0
-    keys.append(header)
-
-print(keys)
-
-values = []
-for i in range(1,len(parsed_table_data)): # Cycle through elements 1 to the end
-    for j in range(1, len(parsed_table_data[i])): # Cycle through elements 1 to 7 in
-        for value in : # Within each element
-        values()
-# print(row.text)
 '''
 
 '''
