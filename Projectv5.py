@@ -90,9 +90,10 @@ nt_converter = 0.032
 cny_converter = 0.14
 sgd_converter = 0.73
 
-for farerate_unit in farerate:
-    if 'US$' in farerate_unit[0:3]:
-        segment = farerate_unit.split('US$')[1][0:4].strip()
+# Clean the Fare rate column 
+for farerate_unit in farerate: 
+    if 'US$' in farerate_unit[0:3]: 
+        segment = farerate_unit.split('US$')[1][0:4].strip() 
         if '+' in segment:
             segment = segment.split('+')[0].strip()
         elif '-' in segment:
@@ -191,9 +192,9 @@ for each_system in range(0, len(bycolumns_cleaned[0])):
     newrow.append(clean_year[each_system])
     byrows_cleaned.append(newrow)
 
-with open('Farebox_Recovery_Ratio_Analysis.csv', mode = 'w') as faredata_file:
-    faredata_writer = csv.writer(faredata_file)
-    faredata_writer.writerow(headers)
+with open('Farebox_Recovery_Ratio_Analysis.csv', mode = 'w') as faredata_file: # Open the Farebox_Recovery_Ratio_Analysis file, and set mode to 'w' to edit and write new information to the file
+    faredata_writer = csv.writer(faredata_file) 
+    faredata_writer.writerow(headers) 
     for i in range(0, len(byrows_cleaned)):
         faredata_writer.writerow(byrows_cleaned[i])
 
