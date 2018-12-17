@@ -1,21 +1,19 @@
 #Question 1
-# need to install pandas through -> easy_install pandas
+from bs4 import BeautifulSoup # Need to import beautiful soup to pull data out of HTML and XML files
+import pandas as pd # Need to import pandas to take data to create a python object with rows and columns called a data frame
+import requests # Need to import requests to handle HTTP related operation
+import csv # Need to import csv to read and write tabular data in CSV format
+import sqlite3 # Need to import sqlite3 to access the database using a variant of the sql language
 
-from bs4 import BeautifulSoup
-import pandas as pd
-import requests
-import csv
-import sqlite3
+conn = sqlite3.connect("FareboxRecoveryRatioAnalysis.sqlite") # To use the module, we must first create a connection object that represents the database. Here, the data is stored in the FareBoxRecoverRatioAnalysis file.
+cur = conn.cursor() # Once we have the connection, we create a cursor object 
 
-conn = sqlite3.connect("FareboxRecoveryRatioAnalysis.sqlite")
-cur = conn.cursor()
-
-website = requests.get("https://en.wikipedia.org/wiki/Farebox_recovery_ratio")
-soup = BeautifulSoup(website.content,'lxml')
-tabularform = soup.find_all('table', {'class':'sortable'})
+website = requests.get("https://en.wikipedia.org/wiki/Farebox_recovery_ratio") # Pull data from this link 
+soup = BeautifulSoup(website.content,'lxml') #'lxml' allows us to parse XML and HTML documents
+tabularform = soup.find_all('table', {'class':'sortable'}) # Find the table on the Wikipedia page
 features = 'html parser'
-newtable = pd.DataFrame()
-parsed_table_data = []
+newtable = pd.DataFrame() # Two dimensional tabular data structure with rows and columns
+parsed_table_data = [] # Create an open list called parsed_data_table
 
 rows = tabularform[0].find_all("tr")
 for row in rows:
@@ -28,6 +26,7 @@ for row in rows:
         cleantext = cleantext.strip()
         rowtext.append(cleantext)
     parsed_table_data.append(rowtext)
+# Create a for loop that appends the open list, parsed_data_table, with the clean text
 
 headers = ['Continent', 'Country', 'System', 'Ratio', 'Fare System', 'Fare Rate (US$)', 'Year']
 continent = []
@@ -37,27 +36,31 @@ ratios = []
 faresystem = []
 farerate = []
 year = []
+# Create open lists for all headers in the table 
 
 for i in range(1, len(parsed_table_data)): # Cycle through elements 1 to the end
     continent.append(parsed_table_data[i][0].strip(" ")) # Excluding trailing or leading spaces
     country.append(parsed_table_data[i][1].strip(" ")) # Excluding trailing or leading spaces
     systemname.append(parsed_table_data[i][2].strip(" ")) # Excluding trailing or leading spaces
-    ratios.append(parsed_table_data[i][3])
-    faresystem.append(parsed_table_data[i][4])
-    farerate.append(parsed_table_data[i][5])
-    year.append(parsed_table_data[i][6][0:4])
+    ratios.append(parsed_table_data[i][3]) # Pulling the 4th column of the Wikipedia table
+    faresystem.append(parsed_table_data[i][4]) # Pulling the 5th column of the Wikipedia table
+    farerate.append(parsed_table_data[i][5]) # Pulling the 6th column of the Wikipedia table
+    year.append(parsed_table_data[i][6][0:4]) # Pulling the year from the 7th column of the Wikipedia table, excluding the superscipt
 
 def CleanRatio(raw_ratio):
     s = raw_ratio.split("%")
     return float(s[0])/100.00
+# Define a function called CleanRatio that excludes the "%" sign and converts the ratio into a float
 
 clean_ratios = []
 for ratio in ratios:
     clean_ratios.append(CleanRatio(ratio))
+# Create a for loop that appends the list, clean_ratios, using the function CleanRatio
 
 def CleanFareSystem(fs):
     cfs = fs.strip().lower()
     return cfs
+# Define a function called CleanFareSystem that converts words to lowercase
 
 clean_faresystem = []
 for faresystem_unit in faresystem:
@@ -69,6 +72,7 @@ for faresystem_unit in faresystem:
         clean_faresystem.append(CleanFareSystem(faresystem_unit))
     else:
         clean_faresystem.append(CleanFareSystem(faresystem_unit))
+# Create a for loop that appends the list, clean_faresystem, using the function CleanFareSystem which will standardize all of the "flat rate" and zone based" terms
 
 # Conversion Rates to USD i.e. Quantity of USD Comprising Each Currency
 clean_farerate = []
