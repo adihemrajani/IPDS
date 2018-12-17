@@ -187,15 +187,6 @@ for each_system in range(0, len(bycolumns_cleaned[0])):
     newrow.append(clean_year[each_system])
     byrows_cleaned.append(newrow)
 
-
-#print(len(clean_ratios))
-#print(len(clean_faresystem))
-#print(len(clean_farerate))
-#print(len(clean_year))
-
-#import sqlite3
-#conn = sqlite3.connect("something.db")
-
 with open('Farebox_Recovery_Ratio_Analysis.csv', mode = 'w') as faredata_file:
     faredata_writer = csv.writer(faredata_file)
     faredata_writer.writerow(headers)
@@ -212,12 +203,6 @@ create_table_sql = """CREATE TABLE IF NOT EXISTS FareboxDataAnalysis (
                                         year INTEGER);"""
 
 cur.execute(create_table_sql)
-
-#for continent_unit in continent:
-    #sql = """ INSERT INTO ratios VALUES (%s); """ % continent_unit
-    #print(sql)
-    #cur.execute(sql)
-    #conn.commit()
 
 for i in range(0, len(byrows_cleaned)):
     continent = byrows_cleaned[i][0]
